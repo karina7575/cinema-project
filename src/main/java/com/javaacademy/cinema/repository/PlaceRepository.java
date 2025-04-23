@@ -1,0 +1,41 @@
+package com.javaacademy.cinema.repository;
+
+import com.javaacademy.cinema.entity.Place;
+import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Optional;
+
+@Repository
+@RequiredArgsConstructor
+public class PlaceRepository {
+    private final JdbcTemplate jdbcTemplate;
+
+    /*
+    Поиск места по id
+     */
+    public Optional<Place> findById(Integer id) {
+        String sql = "SELECT * FROM seat WHERE id = ?";
+        try {
+            return Optional.of(jdbcTemplate.queryForObject(sql, this::mapToPlace, id));
+        }
+        catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
+    }
+    /*
+    Преобразование строки из БД в объект класса Place
+    */
+    private Place mapToPlace(ResultSet rs, int rowNum) throws SQLException {
+        Place place = new Place();
+        place.setId(rs.getInt("id"));
+        place.setSeatNumber(rs.getString("seat_number"));
+        return place;
+    }
+
+
+
+}
