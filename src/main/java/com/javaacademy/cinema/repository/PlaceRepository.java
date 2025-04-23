@@ -1,12 +1,14 @@
 package com.javaacademy.cinema.repository;
 
 import com.javaacademy.cinema.entity.Place;
+import com.javaacademy.cinema.entity.Session;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -36,6 +38,14 @@ public class PlaceRepository {
         return place;
     }
 
+    /*
+    Все места
+    */
+    public List<Place> selectAll() {
+        String sql = "SELECT * FROM seat";
+        List<Place> result = jdbcTemplate.query(sql, this::mapToPlace);
+        return result;
+    }
 
 
 }
