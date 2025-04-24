@@ -1,6 +1,7 @@
 package com.javaacademy.cinema.service;
 
 import com.javaacademy.cinema.dto.MovieDto;
+import com.javaacademy.cinema.entity.Movie;
 import com.javaacademy.cinema.mapper.MovieMapper;
 import com.javaacademy.cinema.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,9 @@ public class MovieService {
         return result;
     }
 
-    public void save(MovieDto movieDto) {
-        movieRepository.save(movieMapper.mapToEntity(movieDto));
+    public MovieDto save(MovieDto movieDto) {
+        Movie movie = movieRepository.save(movieMapper.mapToEntity(movieDto));
+        return movieMapper.mapToDto(movie);
     }
 
 

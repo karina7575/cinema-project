@@ -1,7 +1,5 @@
 package com.javaacademy.cinema.repository;
 
-import com.javaacademy.cinema.entity.Movie;
-import com.javaacademy.cinema.entity.Session;
 import com.javaacademy.cinema.entity.Ticket;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -11,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
-
 import static java.util.Collections.emptyList;
 
 @Repository
@@ -50,9 +47,7 @@ public class TicketRepository {
             Integer sessionId = Integer.valueOf(rs.getString("session_id"));
             ticket.setSession(sessionRepository.findById(sessionId).orElse(null));
         }
-
         ticket.setBuyed(rs.getBoolean("is_buyed"));
-
         return ticket;
     }
 
@@ -70,7 +65,10 @@ public class TicketRepository {
     Смена статуса билета в БД на "куплен"
     */
     public void changeIsBuyed(Integer id) {
-        Ticket ticket = findById(id).get();
+        Ticket ticket = findById(id).orElse(null);
+        if(ticket == null) {
+            throw new RuntimeException("Такого билета нет");
+        }
         if(ticket.isBuyed()) {
             throw new RuntimeException("Билет уже куплен");
         }

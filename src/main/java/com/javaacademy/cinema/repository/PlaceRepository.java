@@ -1,7 +1,6 @@
 package com.javaacademy.cinema.repository;
 
 import com.javaacademy.cinema.entity.Place;
-import com.javaacademy.cinema.entity.Session;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -46,6 +45,4 @@ public class PlaceRepository {
         List<Place> result = jdbcTemplate.query(sql, this::mapToPlace);
         return result;
     }
-
-
 }
