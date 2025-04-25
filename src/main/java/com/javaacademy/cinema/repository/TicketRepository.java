@@ -93,6 +93,15 @@ public class TicketRepository {
     }
 
     /*
+    Список купленных билетов
+     */
+    public List<Ticket> findAllTakenTickets() {
+        String sql = "SELECT * FROM ticket WHERE is_buyed = true;";
+        List<Ticket> result = Optional.of(jdbcTemplate.query(sql, this::mapToTicket)).orElse(emptyList());
+        return result;
+    }
+
+    /*
     Список некупленных билетов для сеанса
      */
     public List<Ticket> findFreeTickets(Integer sessionId) {

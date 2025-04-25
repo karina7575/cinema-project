@@ -1,10 +1,10 @@
 package com.javaacademy.cinema.controller;
 
 import com.javaacademy.cinema.dto.SessionDto;
-import com.javaacademy.cinema.service.PlaceService;
 import com.javaacademy.cinema.service.SessionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +30,16 @@ public class SessionController {
     */
     @GetMapping
     public List<SessionDto> findAll() {
-        sessionService.selectAll();
+        return sessionService.selectAll();
     }
+
+    /*
+    Получение списка свободных мест на сеанс
+    */
+    @GetMapping("{id}/free-place")
+    public List<String> findFreePlacesForSession(@PathVariable Integer id) {
+        return sessionService.findFreeSeatsForSession(id);
+    }
+
+
 }
