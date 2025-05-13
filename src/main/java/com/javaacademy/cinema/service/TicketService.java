@@ -70,11 +70,10 @@ public class TicketService {
     /*
     Смена статуса билета на "куплен"
     */
-    public BuyedTicketDto changeIsBuyed(@RequestBody Dto dto) {
-        //надо найти айди билета
+    public BuyedTicketDto changeIsBuyed(Dto dto) {
         List<Ticket> tickets = ticketRepository.findFreeTickets(dto.getSessionId());
         if(tickets.isEmpty()){
-            //что-то плохое, нет свободных билетов
+            return null;
         }
         else {
             for(int i = 0; i < tickets.size(); i++) {
@@ -85,13 +84,6 @@ public class TicketService {
                 }
             }
         }
-
-        try {
-            ticketRepository.changeIsBuyed(id);
-            return true;
-        }
-        catch (RuntimeException e) {
-            return false;
-        }
+        return null;
     }
 }

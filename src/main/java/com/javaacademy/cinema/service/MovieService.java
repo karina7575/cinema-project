@@ -1,5 +1,6 @@
 package com.javaacademy.cinema.service;
 
+import com.javaacademy.cinema.dto.AdminMovieDto;
 import com.javaacademy.cinema.dto.MovieDto;
 import com.javaacademy.cinema.entity.Movie;
 import com.javaacademy.cinema.mapper.MovieMapper;
@@ -22,9 +23,9 @@ public class MovieService {
         return result;
     }
 
-    public MovieDto save(MovieDto movieDto) {
+    public AdminMovieDto save(MovieDto movieDto) {
         Movie movie = movieRepository.save(movieMapper.mapToEntity(movieDto));
-        return movieMapper.mapToDto(movie);
+        return movieMapper.mapToAdminDto(movie);
     }
 
 

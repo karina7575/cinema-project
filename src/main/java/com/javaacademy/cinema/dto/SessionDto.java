@@ -1,5 +1,6 @@
 package com.javaacademy.cinema.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.javaacademy.cinema.entity.Movie;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +15,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class SessionDto {
     private Integer id;
+    @JsonProperty("movie_date")
     private LocalDateTime movieDate;
+    @JsonProperty("price")
     private BigDecimal price;
+    @JsonProperty("movie")
     private Movie movie;
 }
