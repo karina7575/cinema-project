@@ -2,9 +2,11 @@ package com.javaacademy.cinema.controller;
 
 import com.javaacademy.cinema.exception.InvalidAutorizationException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
+@Component
 public class Validator {
     @Value("${app.admin_token}")
     String trueToken;

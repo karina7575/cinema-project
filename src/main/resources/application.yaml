@@ -4,3 +4,6 @@ spring:
     username: postgres
     password: postgres
     driver: org.postgresql.Driver
+app:
+  admin_token: "user-token"
+  admin_password: "secretadmin123"
